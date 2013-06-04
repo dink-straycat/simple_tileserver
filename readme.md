@@ -5,6 +5,9 @@ Apache, mod_tile不要のタイルサーバです。DB環境とmapnikは必要�
 
 検証環境はLinux Mint 14ですが、たぶん最新のUbuntuでも動くんじゃないかな。
 
+すでにapache+mod_tileで動作できるスタイルを持ってらっしゃる方は、tileserver.confを作って設定ファイルの場所を指定した上でsimple_tileserver.pyを実行すれば動くはず。以下は環境を持ってない人向けの手順です。
+
+
 ## タイルの生成まで
 
 まず、gitリポジトリを複製。
