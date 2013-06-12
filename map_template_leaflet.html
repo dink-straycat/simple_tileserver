@@ -1,0 +1,53 @@
+<html>
+<head>
+    <title>OpenStreetMap custom style</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,initial-scale=1.0,user-scalable=0">
+    <link rel="stylesheet" href="static/leaflet.css" />
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="static/leaflet.ie.css" />
+    <![endif]-->
+    <script src="static/leaflet.js"></script>
+    <script src="static/leaflet.restoreview.js"></script>
+    <script type="text/javascript">
+        var lon = 139.668826;
+        var lat = 35.6075666;
+        var zoom = 18;
+
+        var map;
+ 
+        //Initialise the 'map' object
+	window.onload = function init() {
+	    var custom = L.tileLayer("tiles/{z}/{x}/{y}.png", {
+		attribution: 'Map data &copy; <a href="http://www.osm.org">OpenStreetMap</a>',
+	        maxZoom: 20
+	    });
+            map = L.map('map', {
+	        center: new L.LatLng(lat, lon),
+		zoom: zoom,
+		maxZoom: 20,
+		layers: [custom]
+	    });
+	    L.control.scale({metric:true, imperial:false}).addTo(map);
+	    if (!map.restoreView()) {
+	        map.setView([lat, lon], zoom);
+	    }
+        };
+    </script>
+    <style>
+    html,body{
+        margin: 0px;
+        width:100%;
+	height:100%;
+    }
+    #map{
+        margin: 0px;
+        width:100%;
+	height:100%;
+    }
+    </style>
+</head>
+<body>
+    <div style="" id="map"></div>
+</body>
+ 
+</html>
