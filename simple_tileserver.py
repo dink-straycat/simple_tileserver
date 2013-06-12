@@ -74,7 +74,7 @@ def application(env, start_response):
   config.read(cfgfile)
   stylename = config_get(config,"global","stylename","osm.xml")
   styledir = config_get(config,"global","styledir","../mapnik-stylesheets")
-  map_template = config_get(config,"global","map_template","map_template.html")
+  map_template = config_get(config,"global","map_template","map_template_leaflet.html")
   
   # mod-wsgi gives control to our script only for /name and /name/...
   # thus any length <2 should show the overview page

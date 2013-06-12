@@ -6,4 +6,4 @@ stylename=osm.xml
 styledir=../mapnik-stylesheets
 
 # relative path to map_template.html
-map_template=map_template.html
+map_template=map_template_leaflet.html
