@@ -52,6 +52,16 @@ def genSlippyMap(start_response):
   start_response(status, response_headers)
   return tdata
  
+def showStaticContent(start_response, pathinfo):
+  status = '200 OK'
+  content = open('static/'+pathinfo,'r')
+  tdata = content.read()
+  content.close()
+  import mimetypes
+  response_headers = [('Content-type', mimetypes.guess_type(pathinfo)[0]),('Content-Length', str(len(tdata)))]
+  start_response(status, response_headers)
+  return tdata
+
 # read configuration if exists
 def config_get(config, section, option, default):
   if config.has_option(section,option):
@@ -60,7 +70,6 @@ def config_get(config, section, option, default):
     return default
 
 def application(env, start_response):
-  global sandbox_dir
   global stylename
   global map_template
   
@@ -76,6 +85,11 @@ def application(env, start_response):
   styledir = config_get(config,"global","styledir","../mapnik-stylesheets")
   map_template = config_get(config,"global","map_template","map_template_leaflet.html")
   
+  # show static content when URL starts with '/static/'
+  m = re.match(r"^/static/(.+)$", pathinfo)
+  if m:
+    return showStaticContent(start_response, m.group(1))
+
   # mod-wsgi gives control to our script only for /name and /name/...
   # thus any length <2 should show the overview page
   if len(pathinfo) < 2:

@@ -2,16 +2,12 @@
 <head>
     <title>OpenStreetMap custom style</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,initial-scale=1.0,user-scalable=0">
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
-    <link rel="stylesheet" href="leaflet/L.Control.Locate.css" />
+    <link rel="stylesheet" href="static/leaflet.css" />
     <!--[if lte IE 8]>
-        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.ie.css" />
-        <link rel="stylesheet" href="leaflet/L.Control.Locate.ie.css" />
+        <link rel="stylesheet" href="static/leaflet.ie.css" />
     <![endif]-->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
-    <script src="leaflet/L.Control.Locate.js"></script>
-    <script src="leaflet/leaflet.restoreview.js"></script>
+    <script src="static/leaflet.js"></script>
+    <script src="static/leaflet.restoreview.js"></script>
     <script type="text/javascript">
         var lon = 139.668826;
         var lat = 35.6075666;
@@ -20,7 +16,7 @@
         var map;
  
         //Initialise the 'map' object
-	$(function init() {
+	window.onload = function init() {
 	    var custom = L.tileLayer("tiles/{z}/{x}/{y}.png", {
 		attribution: 'Map data &copy; <a href="http://www.osm.org">OpenStreetMap</a>',
 	        maxZoom: 20
@@ -32,11 +28,10 @@
 		layers: [custom]
 	    });
 	    L.control.scale({metric:true, imperial:false}).addTo(map);
-	    L.control.locate().addTo(map);
 	    if (!map.restoreView()) {
 	        map.setView([lat, lon], zoom);
 	    }
-        });
+        };
     </script>
     <style>
     html,body{
