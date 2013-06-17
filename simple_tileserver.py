@@ -65,7 +65,7 @@ def showStaticContent(start_response, pathinfo):
 # read configuration if exists
 def config_get(config, section, option, default):
   if config.has_option(section,option):
-    return config_get(section,option)
+    return config.get(section,option)
   else:
     return default
 
