@@ -2,12 +2,14 @@
 <head>
     <title>OpenStreetMap custom style</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,initial-scale=1.0,user-scalable=0">
-    <link rel="stylesheet" href="static/leaflet.css" />
+    <link rel="stylesheet" href="static/leaflet/leaflet.css" />
     <!--[if lte IE 8]>
-        <link rel="stylesheet" href="static/leaflet.ie.css" />
+        <link rel="stylesheet" href="static/leaflet/leaflet.ie.css" />
     <![endif]-->
-    <script src="static/leaflet.js"></script>
-    <script src="static/leaflet.restoreview.js"></script>
+    <script src="static/leaflet/leaflet.js"></script>
+    <script src="static/leaflet/leaflet.restoreview.js"></script>
+    <script src="static/leaflet/Permalink.js"></script>
+
     <script type="text/javascript">
         var lon = 139.668826;
         var lat = 35.6075666;
@@ -24,13 +26,12 @@
             map = L.map('map', {
 	        center: new L.LatLng(lat, lon),
 		zoom: zoom,
-		maxZoom: 20,
-		layers: [custom]
+		maxZoom: 20
 	    });
 	    L.control.scale({metric:true, imperial:false}).addTo(map);
-	    if (!map.restoreView()) {
-	        map.setView([lat, lon], zoom);
-	    }
+            map.addLayer(custom);
+	    map.restoreView();
+	    map.addControl(new L.Control.Permalink({position: 'bottomright'}));
         };
     </script>
     <style>
